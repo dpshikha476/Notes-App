@@ -9,25 +9,66 @@
     <title>Notes </title>
 </head>
 
+<style>
+    .cont{
+            height: 120vh;
+        }
+    .con{
+        
+        display: inline-flex;
+        float: right;
+    }
+
+        .footer {
+            margin-top: 60px;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            padding-top: 2px;
+            background-color:#f4f9f9;
+            color: black;
+            text-align: center;
+        }
+
+</style>
+
+
 <body>
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="display-4">Your Notes</h1>
+    <div class="cont">
+    <div class="jumbotron jumbotron-fluid" style="background-color: #f4f9f9; ">
+        <div class="container" >
+            <h1 class="display-4 ">Your Notes</h1>
+
+            <div class="con">
+        
+                <a href="/update/<%= id %>" class="btn btn-warning float-right" style="margin-right: 20px;"> UPDATE </a>
+            <form action="/delete/<%= id %>" method="POST">
+                <button type="submit" class="btn btn-danger float-right" > DELETE </button>
+            </form>
+           
+            </div>
+
         </div>
     </div>
     <div class="container">
         <div class="card mt-2">
             <div class="card-body">
 
-                <div style="background-color: bisque;">
+                <div style="background-color: bisque; padding: 20px;">
                 <h2 class="card-title"><%= title %></h2>
                 <p class="text-muted">Posted On: <%= createdAt %></p>
                 </div>
-                <div style="margin-top: 40px;">
+                <div style="margin-top: 40px; padding: 20px;">
                 <h5><%= description %></h5>
                 </div>
             </div>
         </div>
       
+    </div>
+
+    <div class="footer" >
+        <p>&copy; Deepshikha</p>
+      </div>
     </div>
 </body>

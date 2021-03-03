@@ -81,6 +81,7 @@ app.route("/notes/:notesId")
   Note.findById(req.params.notesId, function(err, foundNote){
     if (!err) {
       res.render("note", {
+        id: foundNote._id,
         title: foundNote.title,
         createdAt: foundNote.createdAt,
         description: foundNote.description
@@ -90,12 +91,18 @@ app.route("/notes/:notesId")
       res.send("Not found!");
     }
   });
+});
+
+app.route("/update/:notesId")
+.get( function(req, res){
+  res.render("update",{
+    id: req.params.notesId
+  });
 })
 
+.post(function(req, res){
 
-.patch(function(req, res){
-
-  Note.update(
+  Note.findOneAndUpdate(
     {_id:  req.params.notesId},
     {$set: req.body},
     function(err){
@@ -108,11 +115,13 @@ app.route("/notes/:notesId")
   );
 });
 
-app.route("/notes/:id")
-.delete(function(req, res){
+
+app.route("/delete/:notesId")
+
+.post(function(req, res){
  
-  Note.findOneAndRemove(
-    {_id: req.params.id}, 
+  Note.findOneAndDelete(
+    {_id: req.params.notesId}, 
     function(err){
       if (!err){
         res.redirect("/");
@@ -122,7 +131,6 @@ app.route("/notes/:id")
     }
   );
 });
-
 
 
 

@@ -2,38 +2,74 @@
 <html lang="en">
 
 <head>
+   
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <title>Notes Tonight</title>
+    <title>Notes</title>
+
+    <style>
+        .cont{
+            height: 120vh;
+        }
+        .con{
+            display: inline-flex;
+            float: right;
+        }
+        .footer {
+            margin-top: 60px;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            padding-top: 2px;
+            background-color:#f4f9f9;
+            color: black;
+            text-align: center;
+        }
+    
+    </style>
+
 </head>
 
 <body>
-    <div class="jumbotron jumbotron-fluid">
+    <div class="cont">
+    <div class="jumbotron jumbotron-fluid" style="background-color: #f4f9f9;">
         <div class="container">
             <h1 class="display-4">Your Notes</h1>
-        <a href="/new" class="btn btn-success float-right">New Note</a>
+        <a href="/new" class="btn btn-primary float-right">New Note</a>
         </div>
     </div>
     <div class="container">
         <% notes.forEach(note => { %>
         <div class="card mt-2">
-            <div class="card-body">
 
-                <form action="/notes/<%=note._id%>" method="DELETE">
-                    <button type="submit" class="btn btn-danger float-right"">x</button>
-                </form>
+            <div class="card-body">
+                <div class="con">
+                    <a href="/update/<%=  note._id %>" class="btn btn-warning float-right" style=" margin-right: 10px; "> <i class="fas fa-pencil-alt" style="color: white; " ></i> </a>
+    
+                    <form action="/delete/<%= note._id %>" method="POST">
+                        <button type="submit" class="btn btn-danger float-right"  > <i class="fas fa-trash-alt"  style="color: white;" ></i> </button>
+                    </form>
+                </div>
 
                 <h5 class="card-title"><%= note.title %></h5>
                 <p class="text-muted">Posted On: <%= note.createdAt.toLocaleDateString() %></p>
                 <form action="/" method="GET">
-                    <a class="btn btn-primary float-left" href="/notes/<%=note._id%>">View</a>
+                    <a class="btn btn-info float-left" href="/notes/<%=note._id%> ">View</a>
                 </form>
             </div>
         </div>
         <%}) %>
     </div>
+    
+  <div class="footer" >
+    <p>&copy; Deepshikha</p>
+  </div>
+</div>
 </body>
 
 </html>
